@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+struct library
+{
+    string name_of_student;
+    int reg_no;
+    string section;
+    string name_of_book;
+}s1;
+
+int main(){
+    
+    s1.name_of_student = "Meghaa";
+    s1.reg_no = 802;
+    s1.section = "L1";
+    s1.name_of_book = "Let us C";
+    
+    
+    cout<<"STUDENT DETAILS:"<<endl;
+    cout<<s1.name_of_student<<endl;
+    cout<<s1.reg_no<<endl;
+    cout<<s1.section<<endl;
+    cout<<s1.name_of_book<<endl;
+    
+};
