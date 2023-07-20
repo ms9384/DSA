@@ -1,0 +1,14 @@
+#include <stdio.h>
+  
+struct number {
+  int n;
+};
+  
+int main()
+{
+  struct number n1 = {1};
+  struct number n2 = n1;
+  printf("n2 is : %d ", n2.n);
+ 
+  return 0;
+};
