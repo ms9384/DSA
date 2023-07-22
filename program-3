@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+  
+struct vehicle{
+    struct car{
+        string car_model;
+        int nameplate_no;
+    }c1,c2;
+    struct bike{
+        string bike_model;
+    }b1;
+}v; //implementaion of structures and nested structures
+
+int main(){
+    v.c1.car_model = "Honda Jazz VX";
+    v.c1.nameplate_no = 6303;
+    
+    v.c2.car_model = v.c1.car_model; //assignement operator
+    v.c2.nameplate_no = 2345;
+    
+    if (v.c1.car_model==v.c2.car_model){
+        cout<<"Both cars are the same brand"<<endl;
+    }
+    else{
+        cout<<"Both cars are different brands"<<endl;
+    }//comparison operator
+    
+    v.b1.bike_model = "Royal Enfield Hunter 350";
+    
+    cout<<v.c1.nameplate_no<<endl;
+    cout<<v.c2.car_model<<endl;
+    cout<<v.b1.bike_model<<endl;
+}
