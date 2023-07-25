@@ -25,7 +25,7 @@ int main(){
         cout<<"Both cars have different numbers"<<endl;
     }//comparison operator
     
-    count<<"Enter the bike's model";
+    cout<<"Enter the bike's model";
     cin>>v.b1.bike_model;
     
     cout<<v.c1.nameplate_no<<endl;
