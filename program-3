@@ -25,7 +25,8 @@ int main(){
         cout<<"Both cars are different brands"<<endl;
     }//comparison operator
     
-    v.b1.bike_model = "Royal Enfield Hunter 350";
+    count<<"Enter the bike's model";
+    cin>>v.b1.bike_model;
     
     cout<<v.c1.nameplate_no<<endl;
     cout<<v.c2.car_model<<endl;
