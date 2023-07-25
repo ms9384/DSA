@@ -31,3 +31,10 @@ int main(){
     cout<<v.c2.car_model<<endl;
     cout<<v.b1.bike_model<<endl;
 }
+
+OUTPUT
+Both cars are the same brand
+6303
+Honda Jazz VX
+Royal Enfield Hunter 350
+
