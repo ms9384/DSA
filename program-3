@@ -18,11 +18,11 @@ int main(){
     v.c2.car_model = v.c1.car_model; //assignement operator
     v.c2.nameplate_no = 2345;
     
-    if (v.c1.car_model==v.c2.car_model){
-        cout<<"Both cars are the same brand"<<endl;
+    if (v.c1.nameplate_no==v.c2.nameplate_no){
+        cout<<"Both cars have the same number"<<endl;
     }
     else{
-        cout<<"Both cars are different brands"<<endl;
+        cout<<"Both cars have different numbers"<<endl;
     }//comparison operator
     
     count<<"Enter the bike's model";
