@@ -1,0 +1,27 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+  int num1;
+  char num2;
+  struct node *link;
+};
+
+int
+main ()
+{
+  struct node ob1;	
+  ob1.num1 = 1;
+  ob1.num2 = 2;
+
+  struct node ob2;	
+  ob2.num1 = 3;
+  ob2.num2 = 4;
+
+  ob1.link = &ob2;
+
+  printf ("%d", ob1.link->num1);
+  printf ("\n%d", ob1.link->num2);
+  return 0;
+}
