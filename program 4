@@ -1,0 +1,26 @@
+#include<iostream>
+using namespace std;
+
+struct person
+{
+    char name[30];
+    int age;
+};
+
+int main()
+{
+    struct person *ptr,p1;
+    ptr = &p1;
+    
+    cin>>(*ptr).name;
+    cout<<(*ptr).name<<endl;
+    
+    cin>>(*ptr).age;
+    cout<<(*ptr).age<<endl;
+}
+
+OUTPUT
+Meghaa
+Meghaa
+12
+12
