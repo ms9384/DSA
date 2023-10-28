@@ -1,0 +1,139 @@
+#include<iostream>
+using namespace std;
+
+#define maxsize 10
+int list[maxsize], n;
+
+void Create();
+void Insert();
+void Delete();
+void Display();
+void Search();
+
+int main() {
+    int choice;
+    do {
+        cout << "\nArray Implementation of List\n";
+        cout << "\t1. Create\n";
+        cout << "\t2. Insert\n";
+        cout << "\t3. Delete\n";
+        cout << "\t4. Display\n";
+        cout << "\t5. Search\n";
+        cout << "\t6. Exit\n";
+        cout << "\nEnter your choice:\t";
+        cin >> choice;
+        switch (choice) {
+            case 1: Create(); break;
+            case 2: Insert(); break;
+            case 3: Delete(); break;
+            case 4: Display(); break;
+            case 5: Search(); break;
+            case 6: exit(1);
+            default: cout << "\nEnter option between 1 - 6\n"; break;
+        }
+    } while (choice < 7);
+    return 0;
+}
+
+void Create() {
+    int i;
+    cout << "\nEnter the number of elements to be added in the list:\t";
+    cin >> n;
+    cout << "\nEnter the array elements:\t";
+    for (i = 0; i < n; i++)
+        cin >> list[i];
+    Display();
+}
+
+void Insert() {
+    int i, data, pos;
+    cout << "\nEnter the data to be inserted:\t";
+    cin >> data;
+    cout << "\nEnter the position at which element to be inserted:\t";
+    cin >> pos;
+    for (i = n - 1; i >= pos - 1; i--)
+        list[i + 1] = list[i];
+    list[pos - 1] = data;
+    n += 1;
+    Display();
+}
+
+void Delete() {
+    int i, pos;
+    cout << "\nEnter the position of the data to be deleted:\t";
+    cin >> pos;
+    cout << "\nThe data deleted is:\t" << list[pos - 1];
+    for (i = pos - 1; i < n - 1; i++)
+        list[i] = list[i + 1];
+    n = n - 1;
+    Display();
+}
+
+void Display() {
+    int i;
+    cout << "\nElements in the array\n";
+    for (i = 0; i < n; i++)
+        cout << list[i] << "\t";
+    cout << endl;
+}
+
+void Search() {
+    int search, i, count = 0;
+    cout << "\nEnter the element to be searched:\t";
+    cin >> search;
+    for (i = 0; i < n; i++) {
+        if (search == list[i]) {
+            count++;
+        }
+    }
+    if (count == 0)
+        cout << "\nElement not present in the list";
+    else
+        cout << "\nElement present in the list";
+}
+
+
+OUTPUT
+Array Implementation of List
+1.Create
+2.Insert
+3.Delete
+4.Display
+5.Search
+6.Exit
+Enter your choice: 1
+Enter the number of elements to be added in the list: 5
+Enter the array elements: 1 2 3 4 5
+Elements in the array
+1 2 3 4 5
+
+Array Implementation of List
+1.Create
+2.Insert
+3.Delete
+4.Display
+5.Search
+6.Exit
+Enter your choice: 2
+Enter the data to be inserted: 3
+Enter the position at which element to be inserted: 1
+Elements in the array
+3 1 2 3 4 5
+
+Array Implementation of List
+1.Create
+2.Insert
+3.Delete
+4.Display
+5.Search
+6.Exit
+Enter your choice: 3
+Enter the position of the data to be deleted: 4
+The data deleted is: 3
+Elements in the array
+3 1 2 4 5
+.
+.
+.
+.
+
