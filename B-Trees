@@ -1,0 +1,130 @@
+#include <iostream>
+#include <vector>
+
+const int T = 3; // The minimum degree of the B-tree
+
+class BTreeNode {
+public:
+    bool isLeaf;
+    std::vector<int> keys;
+    std::vector<BTreeNode*> children;
+
+    BTreeNode(bool leaf = true) : isLeaf(leaf) {}
+};
+
+class BTree {
+public:
+    BTreeNode* root;
+
+    BTree() : root(nullptr) {}
+
+    void insert(int key) {
+        if (root == nullptr) {
+            root = new BTreeNode(true);
+            root->keys.push_back(key);
+        } else {
+            if (root->keys.size() == 2 * T - 1) {
+                BTreeNode* newRoot = new BTreeNode(false);
+                newRoot->children.push_back(root);
+                splitChild(newRoot, 0);
+                insertNonFull(newRoot, key);
+                root = newRoot;
+            } else {
+                insertNonFull(root, key);
+            }
+        }
+    }
+
+    bool search(int key) {
+        return search(root, key);
+    }
+
+private:
+    bool search(BTreeNode* node, int key) {
+        if (node == nullptr) {
+            return false;
+        }
+
+        int i = 0;
+        while (i < node->keys.size() && key > node->keys[i]) {
+            i++;
+        }
+
+        if (i < node->keys.size() && key == node->keys[i]) {
+            return true;
+        } else if (node->isLeaf) {
+            return false;
+        } else {
+            return search(node->children[i], key);
+        }
+    }
+
+    void insertNonFull(BTreeNode* node, int key) {
+        int i = node->keys.size() - 1;
+        if (node->isLeaf) {
+            node->keys.push_back(0);
+            while (i >= 0 && key < node->keys[i]) {
+                node->keys[i + 1] = node->keys[i];
+                i--;
+            }
+            node->keys[i + 1] = key;
+        } else {
+            while (i >= 0 && key < node->keys[i]) {
+                i--;
+            }
+            i++;
+
+            if (node->children[i]->keys.size() == 2 * T - 1) {
+                splitChild(node, i);
+                if (key > node->keys[i]) {
+                    i++;
+                }
+            }
+            insertNonFull(node->children[i], key);
+        }
+    }
+
+    void splitChild(BTreeNode* parent, int index) {
+        BTreeNode* child = parent->children[index];
+        BTreeNode* newChild = new BTreeNode(child->isLeaf);
+
+        parent->keys.insert(parent->keys.begin() + index, child->keys[T - 1]);
+        parent->children.insert(parent->children.begin() + index + 1, newChild);
+
+        newChild->keys.assign(child->keys.begin() + T, child->keys.end());
+        child->keys.erase(child->keys.begin() + T, child->keys.end());
+
+        if (!child->isLeaf) {
+            newChild->children.assign(child->children.begin() + T, child->children.end());
+            child->children.erase(child->children.begin() + T, child->children.end());
+        }
+    }
+};
+
+int main() {
+    BTree btree;
+
+    btree.insert(3);
+    btree.insert(7);
+    btree.insert(1);
+    btree.insert(5);
+    btree.insert(9);
+    btree.insert(2);
+    btree.insert(6);
+    btree.insert(8);
+    btree.insert(4);
+
+    if (btree.search(5)) {
+        std::cout << "5 is in the B-tree." << std::endl;
+    } else {
+        std::cout << "5 is not in the B-tree." << std::endl;
+    }
+
+    if (btree.search(10)) {
+        std::cout << "10 is in the B-tree." << std::endl;
+    } else {
+        std::cout << "10 is not in the B-tree." << std::endl;
+    }
+
+    return 0;
+}
