@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+    
+    Node(int value) : data(value), next(nullptr) {}
+};
+
+class CircularLinkedList {
+public:
+    Node* head;
+    
+    CircularLinkedList() : head(nullptr) {}
+    
+    void insert(int value) {
+        Node* newNode = new Node(value);
+        if (!head) {
+            head = newNode;
+            newNode->next = head;
+        } else {
+            Node* current = head;
+            while (current->next != head) {
+                current = current->next;
+            }
+            current->next = newNode;
+            newNode->next = head;
+        }
+    }
+    
+    void remove(Node* target) {
+        Node* current = head;
+        if (head == target) {
+            while (current->next != head) {
+                current = current->next;
+            }
+            if (current == head) {
+                head = nullptr;
+            } else {
+                head = head->next;
+                current->next = head;
+            }
+            delete target;
+        } else {
+            while (current->next != head && current->next != target) {
+                current = current->next;
+            }
+            if (current->next == target) {
+                current->next = target->next;
+                delete target;
+            }
+        }
+    }
+    
+    Node* getSurvivor(int step) {
+        Node* current = head;
+        while (current->next != current) {
+            for (int i = 1; i < step; i++) {
+                current = current->next;
+            }
+            Node* nextNode = current->next;
+            remove(current);
+            current = nextNode;
+        }
+        return current;
+    }
+    
+    void display() {
+        Node* current = head;
+        if (current) {
+            do {
+                cout << current->data << " ";
+                current = current->next;
+            } while (current != head);
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    int totalPeople, step;
+    cout << "Enter the total number of people: ";
+    cin >> totalPeople;
+    cout << "Enter the step (count to skip): ";
+    cin >> step;
+
+    CircularLinkedList circle;
+    
+    for (int i = 1; i <= totalPeople; i++) {
+        circle.insert(i);
+    }
+
+    Node* survivor = circle.getSurvivor(step);
+
+    cout << "The survivor is person number " << survivor->data << endl;
+    
+    return 0;
+}
