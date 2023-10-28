@@ -42,6 +42,19 @@ int main(){
   cout<<endl;
   }
 };
+
+
+OUTPUT
+Enter the value of a_r and a_c : 2 2
+Enter the value of b_r and b_c : 2 2
+1    2
+2    1
+
+1    2
+2    1
+
+5    4
+4    5
     
       
     
