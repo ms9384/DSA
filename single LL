@@ -1,0 +1,227 @@
+struct node
+{
+        int info;
+        struct node *next;
+};
+struct node *start=NULL;
+
+void create()
+{
+        struct node *temp,*ptr;
+        temp=(struct node *)malloc(sizeof(struct node));
+        if(temp==NULL)
+        {
+                printf(&quot;nOut of Memory Space:n&quot;);
+                exit(0);
+        }
+        printf(&quot;nEnter the data value for the node:t&quot;);
+        scanf(&quot;%d&quot;,&amp;temp-&gt;info);
+        temp-&gt;next=NULL;
+        if(start==NULL)
+        {
+                start=temp;
+        }
+        else
+        {
+                ptr=start;
+                while(ptr-&gt;next!=NULL)
+                {
+                        ptr=ptr-&gt;next;
+                }
+                ptr-&gt;next=temp;
+        }
+}
+
+void display()
+{
+        struct node *ptr;
+        if(start==NULL)
+        {
+                printf(&quot;nList is empty:n&quot;);
+                return;
+
+        }
+        else
+        {
+                ptr=start;
+                printf(&quot;nThe List elements are:n&quot;);
+                while(ptr!=NULL)
+                {
+                        printf(&quot;%dt&quot;,ptr-&gt;info );
+                        ptr=ptr-&gt;next ;
+                }
+        }
+}
+
+void insert_begin()
+{
+        struct node *temp;
+        temp=(struct node *)malloc(sizeof(struct node));
+        if(temp==NULL)
+        {
+                printf(&quot;nOut of Memory Space:n&quot;);
+                return;
+        }
+        printf(&quot;nEnter the data value for the node:t&quot; );
+        scanf(&quot;%d&quot;,&amp;temp-&gt;info);
+        temp-&gt;next =NULL;
+        if(start==NULL)
+        {
+                start=temp;
+        }
+        else
+        {
+                temp-&gt;next=start;
+                start=temp;
+        }
+}
+void insert_end()
+{
+        struct node *temp,*ptr;
+        temp=(struct node *)malloc(sizeof(struct node));
+        if(temp==NULL)
+        {
+                printf(&quot;nOut of Memory Space:n&quot;);
+                return;
+        }
+        printf(&quot;nEnter the data value for the node:t&quot; );
+        scanf(&quot;%d&quot;,&amp;temp-&gt;info );
+        temp-&gt;next =NULL;
+
+        if(start==NULL)
+        {
+                start=temp;
+        }
+        else
+        {
+                ptr=start;
+                while(ptr-&gt;next !=NULL)
+                {
+                        ptr=ptr-&gt;next ;
+                }
+                ptr-&gt;next =temp;
+        }
+}
+void insert_pos()
+{
+        struct node *ptr,*temp;
+        int i,pos;
+        temp=(struct node *)malloc(sizeof(struct node));
+        if(temp==NULL)
+        {
+                printf(&quot;nOut of Memory Space:n&quot;);
+                return;
+        }
+        printf(&quot;nEnter the position for the new node to be
+inserted:t&quot;);
+        scanf(&quot;%d&quot;,&amp;pos);
+        printf(&quot;nEnter the data value of the node:t&quot;);
+        scanf(&quot;%d&quot;,&amp;temp-&gt;info) ;
+  
+        temp-&gt;next=NULL;
+        if(pos==0)
+        {
+                temp-&gt;next=start;
+                start=temp;
+        }
+        else
+        {
+                for(i=0,ptr=start;i&lt;pos-1;i++) { ptr=ptr-&gt;next;
+                        if(ptr==NULL)
+                        {
+                                printf(&quot;nPosition not found:[Handle
+with care]n&quot;);
+                                return;
+                        }
+                }
+                temp-&gt;next =ptr-&gt;next ;
+                ptr-&gt;next=temp;
+        }
+
+}
+void delete_begin()
+{
+        struct node *ptr;
+        if(ptr==NULL)
+        {
+                printf(&quot;nList is Empty:n&quot;);
+                return;
+        }
+        else
+        {
+                ptr=start;
+                start=start-&gt;next ;
+                printf(&quot;nThe deleted element is :%dt&quot;,ptr-&gt;info);
+                free(ptr);
+        }
+}
+void delete_end()
+{
+        struct node *temp,*ptr;
+        if(start==NULL)
+        {
+                printf(&quot;nList is Empty:&quot;);
+                exit(0);
+        }
+        else if(start-&gt;next ==NULL)
+        {
+                ptr=start;
+                start=NULL;
+                printf(&quot;nThe deleted element is:%dt&quot;,ptr-&gt;info);
+                free(ptr);
+        }
+        else
+        {
+                ptr=start;
+                while(ptr-&gt;next!=NULL)
+                {
+                        temp=ptr;
+                        ptr=ptr-&gt;next;
+                }
+                temp-&gt;next=NULL;
+                printf(&quot;nThe deleted element is:%dt&quot;,ptr-&gt;info);
+                free(ptr);
+        }
+}
+void delete_pos()
+{
+        int i,pos;
+        struct node *temp,*ptr;
+
+        if(start==NULL)
+        {
+                printf(&quot;nThe List is Empty:n&quot;);
+                exit(0);
+        }
+        else
+        {
+                printf(&quot;nEnter the position of the node to be
+deleted:t&quot;);
+                scanf(&quot;%d&quot;,&amp;pos);
+                if(pos==0)
+                {
+                        ptr=start;
+                        start=start-&gt;next ;
+                        printf(&quot;nThe deleted element is:%dt&quot;,ptr-
+&gt;info  );
+                        free(ptr);
+                }
+                else
+                {
+                        ptr=start;
+                        for(i=0;i&lt;pos;i++) { temp=ptr; ptr=ptr-&gt;next
+;
+                                if(ptr==NULL)
+                                {
+                                        printf(&quot;nPosition not
+Found:n&quot;);
+                                        return;
+                                }
+                        }
+                        temp-&gt;next =ptr-&gt;next ;
+                        printf(&quot;nThe deleted element is:%dt&quot;,ptr-
+&gt;info );
+                        free(ptr);
+                }
+        }
+}
