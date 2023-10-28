@@ -1,1 +1,48 @@
+#include<iostream>
+using namespace std;
+
+int main(){
+  int **a, **b, **c, **r;
+  int a_r, a_c, b_r, b_c, i, j, k;
+  cout<<"Enter the value of a_r and a_c : ";
+  cin>>a_r>>a_c>>endl;
+  cout<<"Enter the value of b_r and b_c : ";
+  cin>>b_r>>b_c>>endl;
+  if(b_r! = a_c)
+      cout<<"Not possible"<<endl;
+  a = (int**)malloc(a_r*sizeof(int *));
+  for(i=0;i<a_r;i++){
+      a[i][j] = (int**)malloc(a_c*sizeof(int *));
+  }
+  b = (int**)malloc(b_r*sizeof(int *));
+  for(i=0;i<b_r;i++){
+      b[i][j] = (int **)malloc(b_c*sizeof(int *));
+  }
+  r = (int**)malloc(a_r*sizeof(int *));
+  for(i=0;i<a_r;i++){
+    r[i] = (int **)malloc(b_c*sizeof(int*));
+  }
+  for(i=0;i<a_r;i++){
+    for(j=0;j<a_c;j++){
+      cin>>a[i][j];
+    }
+  }
+  for(i=0;i<b_r;i++){
+    for(j=0;j<b_c;j++){
+      cin>>b[i][j];
+    }
+  }
+  for(i=0;i<a_r;i++){
+    for(j=0;j<b_c;j++){
+      for(k=0;k<a_c;k++){
+        r[i][j] = a[i][k]*b[k][j];
+      }
+      cout<<r[i][j];
+    }
+  cout<<endl;
+  }
+};
+    
+      
+    
 
